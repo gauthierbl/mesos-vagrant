@@ -2,7 +2,8 @@
 
 # TODO:
 - [ ] Add sample Chronos job
-- [ ] Get [service discovery](https://open.mesosphere.com/getting-started/service-discovery/) working with HAProxy
+- [x] Get [service discovery](https://open.mesosphere.com/getting-started/service-discovery/) working with HAProxy
+  - [ ] upgrade to use [servicerouter.py](https://github.com/mesosphere/marathon/blob/master/bin/servicerouter.py) 
 - [ ] Fix hacky mesos-slave ip address assignment
 - [ ] Convert MESOS_NODE_CONFIG to a yaml file that can be read in
   - [ ] Have a production like (HA etc) config

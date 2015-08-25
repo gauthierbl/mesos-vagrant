@@ -20,3 +20,9 @@ service marathon start
 
 #Start Chronos
 service chronos start
+
+# Setup HAProxy
+wget https://raw.githubusercontent.com/mesosphere/marathon/master/bin/haproxy-marathon-bridge
+chmod 755 haproxy-marathon-bridge
+./haproxy-marathon-bridge install_haproxy_system localhost:8080
+service haproxy start

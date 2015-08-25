@@ -1,9 +1,14 @@
 {
-  "id": "python3-http-server",
-  "cmd": "python3 -m http.server 8080",
+  "id": "http-server",
+  "args": [
+    "python3",
+    "-m",
+    "http.server",
+    "8080"
+  ],
   "cpus": 0.5,
   "mem": 64.0,
-  "instances": 1,
+  "instances": 3,
   "container": {
     "type": "DOCKER",
     "docker": {
@@ -13,16 +18,14 @@
         {
           "containerPort": 8080,
           "hostPort": 0,
-          "servicePort": 8080,
+          "servicePort": 9000,
           "protocol": "tcp"
-        },
-        {
-          "containerPort": 161,
-          "hostPort": 0,
-          "protocol": "udp"
         }
       ]
     }
+  },
+  "labels": {
+    "notes": "init version"
   },
   "healthChecks": [
     {
