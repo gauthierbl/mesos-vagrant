@@ -6,6 +6,9 @@ rpm -Uvh http://archive.cloudera.com/cdh4/one-click-install/redhat/6/x86_64/clou
 yum -y install zookeeper zookeeper-server
 sudo -u zookeeper zookeeper-server-initialize --myid=1
 
+# Set the cluster name
+echo 'vagrant-cluster' > /etc/mesos-master/cluster
+
 # Start Zookeeper
 service zookeeper-server start
 
