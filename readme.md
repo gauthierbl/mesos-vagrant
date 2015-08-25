@@ -4,6 +4,7 @@
 - [ ] Add sample Docker json for marathon
 - [ ] Add sample Chronos job
 - [ ] Get [service discovery](https://open.mesosphere.com/getting-started/service-discovery/) working with HAProxy
+- [ ] Set Mesos Cluster Name
 - [ ] Fix hacky mesos-slave ip address assignment
 - [ ] Convert MESOS_NODE_CONFIG to a yaml file that can be read in
   - [ ] Have a production like (HA etc) config
@@ -18,3 +19,4 @@
 - [Chronos](https://github.com/mesos/chronos)
 - [Mesos intro course](http://open.mesosphere.com/intro-course/intro.html)
 - [Python http server](http://www.pythonforbeginners.com/modules-in-python/how-to-use-simplehttpserver/)
+- [Kafka on Mesos](https://github.com/mesos/kafka)

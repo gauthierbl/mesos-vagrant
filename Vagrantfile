@@ -15,10 +15,10 @@ MESOS_NODE_CONFIG = [
     :hostname => "mesos-node-01",
     :ip_address => "10.10.10.11"
   },
-  {
-    :hostname => "mesos-node-02",
-    :ip_address => "10.10.10.12"
-  },
+  # {
+  #   :hostname => "mesos-node-02",
+  #   :ip_address => "10.10.10.12"
+  # },
   # {
   #   :hostname => "mesos-node-03",
   #   :ip_address => "10.10.10.13"
@@ -70,7 +70,4 @@ Vagrant.configure(VAGRANT_API_LEVEL) do |config|
 
     end
   end
-
-
-
 end
