@@ -35,20 +35,14 @@ Vagrant.configure(VAGRANT_API_LEVEL) do |config|
     config.vm.define node_config[:hostname] do |node|
       node.vm.box = "chef/centos-7.0"
 
-      # config.vm.provider "virtualbox" do |v|
-      #   v.memory = 2048
-      #   v.cpus = 2
-      # end
-
       # Network settings
       node.vm.network "private_network", ip: node_config[:ip_address]
       node.vm.hostname = node_config[:hostname]
 
-      #TODO: the host are hard coded in the shell script for now :-(
       node.vm.provision "shell" do |s|
         s.name = "update hosts file"
         s.args = MESOS_NODE_CONFIG.map{ |nc| "#{nc[:ip_address]} #{nc[:hostname]}" }
-        s.path = "#{PROVISION_SCRIPTS_BASE_DIR}/01_updateHostFile.sh"
+        s.path = "#{PROVISION_SCRIPTS_BASE_DIR}/updateHostFile.sh"
       end
 
       node.vm.provision "shell" do |s|
@@ -58,6 +52,7 @@ Vagrant.configure(VAGRANT_API_LEVEL) do |config|
 
       if node_config[:master]
 
+        # provision as mesos-master
         node.vm.provision "shell" do |s|
           s.name = "provision master"
           s.path = "#{PROVISION_SCRIPTS_BASE_DIR}/mesosMaster.sh"
@@ -65,44 +60,13 @@ Vagrant.configure(VAGRANT_API_LEVEL) do |config|
 
       else
 
+      # provision as mesos-slave
         node.vm.provision "shell" do |s|
           s.name = "provision slave"
           s.args = "#{MESOS_NODE_CONFIG[0][:ip_address]}"         # TODO: Hacky....
           s.path = "#{PROVISION_SCRIPTS_BASE_DIR}/mesosSlave.sh"
         end
       end
-
-
-
-      # node.vm.provision "shell" do |s|
-      #   s.name = "install Mesos and Marathon"
-      #   s.args = "#{node_config[:ip_address]} #{node_config[:hostname]}"
-      #   s.path = "#{PROVISION_SCRIPTS_BASE_DIR}/02_installMesos.sh"
-      # end
-      #
-      # node.vm.provision "shell" do |s|
-      #   s.name = "install ZooKeeper"
-      #   s.args = "#{node_config[:ip_address]} #{node_config[:hostname]}"
-      #   s.path = "#{PROVISION_SCRIPTS_BASE_DIR}/03_installZooKeeper.sh"
-      # end
-      #
-      # node.vm.provision "shell" do |s|
-      #   s.name = "start mesos-master and mesos-slave"
-      #   s.args = "#{node_config[:ip_address]} #{node_config[:hostname]}"
-      #   s.path = "#{PROVISION_SCRIPTS_BASE_DIR}/04_startMesos.sh"
-      # end
-      #
-      # node.vm.provision "shell" do |s|
-      #   s.name = "start marathon"
-      #   s.args = "#{node_config[:ip_address]} #{node_config[:hostname]}"
-      #   s.path = "#{PROVISION_SCRIPTS_BASE_DIR}/05_startMarathon.sh"
-      # end
-      #
-      # node.vm.provision "shell" do |s|
-      #   s.name = "install and start Chronos"
-      #   s.args = "#{node_config[:ip_address]} #{node_config[:hostname]}"
-      #   s.path = "#{PROVISION_SCRIPTS_BASE_DIR}/06_installChronos.sh"
-      # end
 
     end
   end
