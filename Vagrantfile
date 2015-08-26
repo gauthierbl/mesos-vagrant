@@ -39,6 +39,12 @@ Vagrant.configure(VAGRANT_API_LEVEL) do |config|
       node.vm.network "private_network", ip: node_config[:ip_address]
       node.vm.hostname = node_config[:hostname]
 
+
+
+      node.vm.provider :virtualbox do |v|
+        v.memory = 1024
+      end
+
       node.vm.provision "shell" do |s|
         s.name = "update hosts file"
         s.args = MESOS_NODE_CONFIG.map{ |nc| "#{nc[:ip_address]} #{nc[:hostname]}" }

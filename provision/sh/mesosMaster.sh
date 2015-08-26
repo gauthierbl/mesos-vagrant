@@ -9,6 +9,10 @@ sudo -u zookeeper zookeeper-server-initialize --myid=1
 # Set the cluster name
 echo 'vagrant-cluster' > /etc/mesos-master/cluster
 
+# Don't run mesos-slave on boot
+sudo systemctl stop mesos-slave.service
+sudo systemctl disable mesos-slave.service
+
 # Start Zookeeper
 service zookeeper-server start
 

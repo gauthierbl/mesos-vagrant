@@ -3,7 +3,7 @@
   "args": [],
   "cpus": 0.1,
   "mem": 64.0,
-  "instances": 2,
+  "instances": 3,
   "container": {
     "type": "DOCKER",
     "docker": {

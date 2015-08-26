@@ -7,7 +7,10 @@ rpm -Uvh http://repos.mesosphere.com/el/7/noarch/RPMS/mesosphere-el-repo-7-1.noa
 yum -y install device-mapper-event-libs docker mesos
 
 # Start Docker
-service docker start
+systemctl start docker
+
+# Docker start on boot
+sudo systemctl enable docker
 
 # Allow vagrant user to do docker stuff
 # sudo usermod -aG docker vagrant
